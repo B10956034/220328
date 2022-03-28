@@ -71,9 +71,24 @@ namespace _220328
             S.Close();
         }
 
+        private string MyIP()
+        {
+            string hostname = Dns.GetHostName();
+            IPAddress[] ip = Dns.GetHostEntry(hostname).AddressList;
+
+            foreach(IPAddress it in ip)
+            {
+                if(it.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return it.ToString();
+                }
+            }
+            return "";
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            this.Text = "我的IP：" + MyIP();
         }
     }
 }
